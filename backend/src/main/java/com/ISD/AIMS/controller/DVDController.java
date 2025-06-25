@@ -45,6 +45,7 @@ public class DVDController {
             dvd.setQuantity(updatedDVD.getQuantity());
             dvd.setWeight(updatedDVD.getWeight());
             dvd.setDimensions(updatedDVD.getDimensions());
+            dvd.setImageUrl(updatedDVD.getImageUrl());
 
             dvd.setDirector(updatedDVD.getDirector());
             dvd.setStudio(updatedDVD.getStudio());

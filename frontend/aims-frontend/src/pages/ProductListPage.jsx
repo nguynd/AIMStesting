@@ -1,47 +1,57 @@
 import React, { useState, useEffect } from 'react';
-import apiClient from '../services/api'; // Import apiClient đã tạo
+import apiClient from '../services/api';
+import ProductCard from '../components/ProductCard'; // Import component mới
+
+// CSS cho layout dạng lưới
+const productGridStyles = {
+  display: 'flex',
+  flexWrap: 'wrap',
+  justifyContent: 'center', // hoặc 'flex-start'
+  gap: '1rem'
+};
 
 function ProductListPage() {
-  // 'products' là một state để lưu trữ danh sách sản phẩm lấy về
   const [products, setProducts] = useState([]);
-  // 'loading' là state để hiển thị trạng thái đang tải
   const [loading, setLoading] = useState(true);
-  // 'error' là state để lưu lỗi nếu có
   const [error, setError] = useState(null);
 
-  // useEffect sẽ chạy một lần sau khi component được render lần đầu tiên
   useEffect(() => {
-    // Định nghĩa một hàm async để gọi API
-    const fetchProducts = async () => {
-      try {
-        // Gọi API để lấy danh sách sách (tạm thời)
-        const response = await apiClient.get('/books'); 
-        setProducts(response.data); // Lưu dữ liệu vào state
-      } catch (err) {
-        setError(err.message); // Lưu lỗi nếu có
-      } finally {
-        setLoading(false); // Dừng hiển thị trạng thái đang tải
-      }
-    };
+  const fetchProducts = async () => {
+    try {
+      // Dùng Promise.all để gọi nhiều API cùng lúc
+      const [booksResponse, cdsResponse] = await Promise.all([
+        apiClient.get('/books'),
+        apiClient.get('/cds')
+        // Thêm các lời gọi API cho DVD, LP ở đây nếu bạn muốn
+      ]);
 
-    fetchProducts(); // Gọi hàm để bắt đầu lấy dữ liệu
-  }, []); // Mảng rỗng [] đảm bảo useEffect chỉ chạy 1 lần
+      // Gộp kết quả từ các API lại thành một danh sách duy nhất
+      const allProducts = [...booksResponse.data, ...cdsResponse.data];
+      setProducts(allProducts);
 
-  // Xử lý các trạng thái giao diện
+    } catch (err) {
+      setError(err.message);
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  fetchProducts();
+}, []);
+
   if (loading) return <p>Đang tải sản phẩm...</p>;
   if (error) return <p>Lỗi: {error}</p>;
 
   return (
     <div>
-      <h2>Danh sách Sản phẩm</h2>
+      <h2>Tất cả Sản phẩm</h2>
       {products.length > 0 ? (
-        <ul>
+        <div style={productGridStyles}>
+          {/* Sử dụng ProductCard để hiển thị mỗi sản phẩm */}
           {products.map(product => (
-            <li key={product.id}>
-              {product.title} - {product.price} VND
-            </li>
+            <ProductCard key={product.id} product={product} />
           ))}
-        </ul>
+        </div>
       ) : (
         <p>Không có sản phẩm nào.</p>
       )}

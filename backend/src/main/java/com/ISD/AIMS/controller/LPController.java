@@ -45,6 +45,7 @@ public class LPController {
             lp.setQuantity(updatedLP.getQuantity());
             lp.setWeight(updatedLP.getWeight());
             lp.setDimensions(updatedLP.getDimensions());
+            lp.setImageUrl(updatedLP.getImageUrl());
 
             lp.setArtist(updatedLP.getArtist());
             lp.setRecordLabel(updatedLP.getRecordLabel());

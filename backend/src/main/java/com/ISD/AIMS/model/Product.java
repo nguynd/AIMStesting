@@ -26,7 +26,7 @@ public abstract class Product {
     private int quantity;
     private double weight;
     private String dimensions;
-
+    private String imageUrl;
     // Getters & Setters
 
     public Long getId() { return id; }
@@ -58,4 +58,6 @@ public abstract class Product {
 
     public String getDimensions() { return dimensions; }
     public void setDimensions(String dimensions) { this.dimensions = dimensions; }
+    public String getImageUrl() { return imageUrl; }
+    public void setImageUrl(String imageUrl) { this.imageUrl = imageUrl; }
 }

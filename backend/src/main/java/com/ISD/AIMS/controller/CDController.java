@@ -56,6 +56,7 @@ public class CDController {
             cd.setWarehouseDate(updatedCD.getWarehouseDate());
             cd.setWeight(updatedCD.getWeight());
             cd.setDimensions(updatedCD.getDimensions());
+            cd.setImageUrl(updatedCD.getImageUrl());
             return cdService.saveCD(cd);
         } else {
             return null;

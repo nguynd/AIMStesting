@@ -45,6 +45,7 @@ public class BookController {
             book.setQuantity(updatedBook.getQuantity());
             book.setWeight(updatedBook.getWeight());
             book.setDimensions(updatedBook.getDimensions());
+            book.setImageUrl(updatedBook.getImageUrl());
 
             book.setAuthors(updatedBook.getAuthors());
             book.setCoverType(updatedBook.getCoverType());
