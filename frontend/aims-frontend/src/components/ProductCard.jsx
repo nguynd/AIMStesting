@@ -24,16 +24,13 @@ const buttonStyles = {
 };
 
 
-function ProductCard({ product }) {
-  // Giả sử có một ảnh mặc định nếu sản phẩm không có ảnh
-  const imageUrl = product.imageUrl || 'https://static.vecteezy.com/system/resources/previews/005/337/799/original/icon-image-not-found-free-vector.jpg';
-
+function ProductCard({ product, imageSrc }) {
   return (
     <div style={cardStyles}>
-      <img src={imageUrl} alt={product.title} style={{ width: '100%', height: '200px', objectFit: 'cover' }} />
-      <h3 style={{ marginTop: '0.5rem', marginBottom: '0.5rem' }}>{product.title}</h3>
-      <p style={{ margin: '0 0 0.5rem 0', color: '#555' }}>{product.category}</p>
-      <p style={{ fontWeight: 'bold', fontSize: '1.2rem' }}>{product.price.toLocaleString('vi-VN')} VND</p>
+      <img src={imageSrc} alt={product.title} style={{ width: '100%', height: '200px', objectFit: 'cover' }} />
+      <h3>{product.title}</h3>
+      <p>{product.category}</p>
+      <p>{product.price.toLocaleString('vi-VN')} VND</p>
       <button style={buttonStyles}>Thêm vào giỏ</button>
     </div>
   );
