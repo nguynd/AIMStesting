@@ -1,37 +1,20 @@
 import React from 'react';
 
-// CSS trực tiếp trong file để tiện lợi
-const cardStyles = {
-  border: '1px solid #ddd',
-  borderRadius: '8px',
-  padding: '1rem',
-  margin: '1rem',
-  width: '250px',
-  boxShadow: '0 2px 4px rgba(0,0,0,0.1)',
-  display: 'flex',
-  flexDirection: 'column',
-  justifyContent: 'space-between'
-};
+// ... (Giữ nguyên các style của bạn)
+const cardStyles = { /* ... */ };
+const buttonStyles = { /* ... */ };
 
-const buttonStyles = {
-  backgroundColor: '#007bff',
-  color: 'white',
-  border: 'none',
-  padding: '0.5rem 1rem',
-  borderRadius: '4px',
-  cursor: 'pointer',
-  marginTop: '1rem'
-};
-
-
-function ProductCard({ product, imageSrc }) {
+// Component giờ sẽ nhận một hàm 'onCardClick'
+function ProductCard({ product, imageSrc, onCardClick }) {
   return (
-    <div style={cardStyles}>
+    // Thêm sự kiện onClick vào thẻ div chính
+    <div style={cardStyles} onClick={() => onCardClick(product)}>
       <img src={imageSrc} alt={product.title} style={{ width: '100%', height: '200px', objectFit: 'cover' }} />
       <h3>{product.title}</h3>
       <p>{product.category}</p>
       <p>{product.price.toLocaleString('vi-VN')} VND</p>
-      <button style={buttonStyles}>Thêm vào giỏ</button>
+      {/* Ngăn sự kiện click của nút lan ra thẻ div cha */}
+      <button style={buttonStyles} onClick={(e) => e.stopPropagation()}>Thêm vào giỏ</button>
     </div>
   );
 }
