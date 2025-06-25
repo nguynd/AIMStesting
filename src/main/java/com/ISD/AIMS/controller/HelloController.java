@@ -8,6 +8,6 @@ public class HelloController {
 
     @GetMapping("/")
     public String hello() {
-        return "✅ Hello AIMS backend is running!";
+        return "Hello AIMS backend is running!";
     }
 }
